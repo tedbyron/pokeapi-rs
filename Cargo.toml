@@ -9,6 +9,7 @@ documentation = "https://github.com/tedbyron/golem"
 readme = "README.md"
 license = "MIT OR Apache-2.0"
 edition = "2018"
+resolver = "2"
 
 [dependencies]
 iced = { features = ["image", "debug", "tokio"], git = "https://github.com/iced-rs/iced" }
