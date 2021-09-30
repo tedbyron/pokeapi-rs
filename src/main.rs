@@ -45,7 +45,7 @@ impl Application for Pokédex {
             Pokédex::Errored { .. } => "Whoops!",
         };
 
-        format!("{} - Pokédex", subtitle)
+        format!("Pokédex - {}", subtitle)
     }
 
     fn update(&mut self, message: Message) -> Command<Message> {
@@ -182,8 +182,7 @@ impl Pokémon {
         let description = entry
             .flavor_text_entries
             .iter()
-            .filter(|text| text.language.name == "en")
-            .next()
+            .find(|text| text.language.name == "en")
             .ok_or(Error::LanguageError)?;
 
         Ok(Pokémon {
