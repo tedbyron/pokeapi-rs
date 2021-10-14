@@ -1,0 +1,19 @@
+[package]
+name = "pokeapi"
+version = "0.1.0"
+edition = "2018"
+description = "Rust PokéAPI bindings."
+authors = ["Teddy Byron <ted@tedbyron.com>"]
+repository = "https://github.com/tedbyron/dex/pokeapi-rs"
+homepage = "https://github.com/tedbyron/dex/pokeapi-rs"
+documentation = "https://docs.rs/pokeapi"
+readme = "README.md"
+license = "MIT OR Apache-2.0"
+keywords = ["pokemon", "pokeapi", "api-bindings", "ureq"]
+categories = ["api-bindings"]
+
+[dependencies]
+ureq = "2.2.0"
+
+[profile.dev]
+debug = 0
