@@ -12,12 +12,14 @@ license = "MIT OR Apache-2.0"
 resolver = "2"
 
 [dependencies]
-iced = { features = ["image", "debug", "tokio"], git = "https://github.com/iced-rs/iced" }
-rand = { version = "0.7", features = ["wasm-bindgen"] }
-reqwest = { version = "0.11.4", features = ["json"] }
+getrandom = { version = "0.2.3", features = ["js"] }
+rand = "0.8.4"
+reqwest = { version = "0.11.5", features = ["json"] }
 serde = { version = "1.0.130", features = ["derive"] }
-serde_json = "1.0.68"
-web-sys = "=0.3.51"
+
+[dependencies.iced]
+features = ["image", "debug", "tokio"]
+git = "https://github.com/iced-rs/iced"
 
 [profile.dev]
 debug = 0
