@@ -1,3 +1,6 @@
 **/*.rs.bk
 /target
 .DS_Store
+
+pokeapi-rs/Cargo.lock
+pokeapi-rs/target
