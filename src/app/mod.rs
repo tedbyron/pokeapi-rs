@@ -41,9 +41,9 @@ impl Application for Pokedex {
 
     fn title(&self) -> String {
         let subtitle = match self {
-            Pokedex::Loading => "Loading",
-            Pokedex::Loaded { pokemon, .. } => &pokemon.name,
-            Pokedex::Errored { .. } => "Whoops!",
+            Self::Loading => "Loading",
+            Self::Loaded { pokemon, .. } => &pokemon.name,
+            Self::Errored { .. } => "Whoops!",
         };
 
         format!("Pok\u{e9}dex - {}", subtitle)
@@ -68,7 +68,7 @@ impl Application for Pokedex {
                 Command::none()
             }
             Message::Search => {
-                if let Pokedex::Loading = self {
+                if let Self::Loading = self {
                     Command::none()
                 } else {
                     *self = Self::Loading;
@@ -81,16 +81,16 @@ impl Application for Pokedex {
 
     fn view(&mut self) -> Element<Message> {
         let content = match self {
-            Pokedex::Loading => Column::new()
+            Self::Loading => Column::new()
                 .width(Length::Shrink)
                 .push(Text::new("Searching for Pok\u{e9}mon...").size(40)),
-            Pokedex::Loaded { pokemon, search } => Column::new()
+            Self::Loaded { pokemon, search } => Column::new()
                 .max_width(500)
                 .spacing(20)
                 .align_items(Alignment::End)
                 .push(pokemon.view())
                 .push(button(search, "Keep searching!").on_press(Message::Search)),
-            Pokedex::Errored { try_again, .. } => Column::new()
+            Self::Errored { try_again, .. } => Column::new()
                 .spacing(20)
                 .align_items(Alignment::End)
                 .push(Text::new("Whoops! Something went wrong...").size(40))

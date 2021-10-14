@@ -7,7 +7,6 @@ pub enum Error {
 impl From<reqwest::Error> for Error {
     fn from(error: reqwest::Error) -> Self {
         dbg!(error);
-
         Self::APIError
     }
 }
