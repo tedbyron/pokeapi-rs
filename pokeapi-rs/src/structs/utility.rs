@@ -21,8 +21,10 @@ pub(super) struct Effect<'a> {
 pub(super) struct Encounter<'a> {
     min_level: i32,
     max_level: i32,
+    #[serde(borrow)]
     condition_values: Vec<NamedAPIResource<'a>>,
     chance: i32,
+    #[serde(borrow)]
     method: NamedAPIResource<'a>,
 }
 
@@ -36,12 +38,15 @@ pub(super) struct FlavorText<'a> {
 #[derive(Deserialize)]
 pub(super) struct GenerationGameIndex<'a> {
     game_index: i32,
+    #[serde(borrow)]
     generation: NamedAPIResource<'a>,
 }
 
 #[derive(Deserialize)]
 pub(super) struct MachineVersionDetail<'a> {
+    #[serde(borrow)]
     machine: APIResource<'a>,
+    #[serde(borrow)]
     version_group: NamedAPIResource<'a>,
 }
 
@@ -66,6 +71,7 @@ pub(super) struct VerboseEffect<'a> {
 
 #[derive(Deserialize)]
 pub(super) struct VersionEncounterDetail<'a> {
+    #[serde(borrow)]
     version: NamedAPIResource<'a>,
     max_chance: i32,
     encounter_details: Vec<Encounter<'a>>,
@@ -74,6 +80,7 @@ pub(super) struct VersionEncounterDetail<'a> {
 #[derive(Deserialize)]
 pub(super) struct VersionGameIndex<'a> {
     game_index: i32,
+    #[serde(borrow)]
     version: NamedAPIResource<'a>,
 }
 
