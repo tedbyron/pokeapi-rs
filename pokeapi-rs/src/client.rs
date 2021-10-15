@@ -2,7 +2,7 @@ use ureq::Agent;
 
 pub const BASE_URL: &str = "https://pokeapi.co/api/v2/";
 
-#[derive(Clone, Debug)]
+#[derive(Debug, Clone)]
 pub struct Client {
     agent: Agent,
 }

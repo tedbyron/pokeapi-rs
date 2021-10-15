@@ -5,12 +5,12 @@
 
 use proc_macro::TokenStream;
 use quote::quote;
-use syn::{Data, DataStruct, DeriveInput, Fields};
+use syn::{parse_macro_input, Data, DataStruct, DeriveInput, Fields};
 
 /// Attribute macro to generate a PokéAPI struct.
 #[proc_macro_attribute]
 pub fn pub_struct(_attr: TokenStream, item: TokenStream) -> TokenStream {
-    let ast: DeriveInput = syn::parse(item).unwrap();
+    let ast: DeriveInput = parse_macro_input!(item);
 
     let name = &ast.ident;
     let generics = &ast.generics;
@@ -30,8 +30,8 @@ pub fn pub_struct(_attr: TokenStream, item: TokenStream) -> TokenStream {
         #[derive(Debug, Clone, Deserialize)]
         pub struct #name #generics {
             #(
-                pub #field_name: #field_type
-            ),*
+                pub #field_name: #field_type,
+            )*
         }
     })
 }
