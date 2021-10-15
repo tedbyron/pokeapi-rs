@@ -1,2 +1,3 @@
 pub mod berry;
-mod utility;
+pub mod contests;
+pub mod utility;

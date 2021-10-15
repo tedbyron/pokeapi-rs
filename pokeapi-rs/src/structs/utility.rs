@@ -1,92 +1,85 @@
 use serde::Deserialize;
 
-#[derive(Deserialize)]
-pub(super) struct APIResource<'a> {
-    url: &'a str,
+#[derive(Debug, Clone, Deserialize)]
+pub struct APIResource {
+    pub url: String,
 }
 
-#[derive(Deserialize)]
-pub(super) struct Description<'a> {
-    description: &'a str,
-    language: NamedAPIResource<'a>,
+#[derive(Debug, Clone, Deserialize)]
+pub struct Description {
+    pub description: String,
+    pub language: NamedAPIResource,
 }
 
-#[derive(Deserialize)]
-pub(super) struct Effect<'a> {
-    effect: &'a str,
-    language: NamedAPIResource<'a>,
+#[derive(Debug, Clone, Deserialize)]
+pub struct Effect {
+    pub effect: String,
+    pub language: NamedAPIResource,
 }
 
-#[derive(Deserialize)]
-pub(super) struct Encounter<'a> {
-    min_level: i32,
-    max_level: i32,
-    #[serde(borrow)]
-    condition_values: Vec<NamedAPIResource<'a>>,
-    chance: i32,
-    #[serde(borrow)]
-    method: NamedAPIResource<'a>,
+#[derive(Debug, Clone, Deserialize)]
+pub struct Encounter {
+    pub min_level: i32,
+    pub max_level: i32,
+    pub condition_values: Vec<NamedAPIResource>,
+    pub chance: i32,
+    pub method: NamedAPIResource,
 }
 
-#[derive(Deserialize)]
-pub(super) struct FlavorText<'a> {
-    flavor_text: &'a str,
-    language: NamedAPIResource<'a>,
-    version: NamedAPIResource<'a>,
+#[derive(Debug, Clone, Deserialize)]
+pub struct FlavorText {
+    pub flavor_text: String,
+    pub language: NamedAPIResource,
+    pub version: NamedAPIResource,
 }
 
-#[derive(Deserialize)]
-pub(super) struct GenerationGameIndex<'a> {
-    game_index: i32,
-    #[serde(borrow)]
-    generation: NamedAPIResource<'a>,
+#[derive(Debug, Clone, Deserialize)]
+pub struct GenerationGameIndex {
+    pub game_index: i32,
+    pub generation: NamedAPIResource,
 }
 
-#[derive(Deserialize)]
-pub(super) struct MachineVersionDetail<'a> {
-    #[serde(borrow)]
-    machine: APIResource<'a>,
-    #[serde(borrow)]
-    version_group: NamedAPIResource<'a>,
+#[derive(Debug, Clone, Deserialize)]
+pub struct MachineVersionDetail {
+    pub machine: APIResource,
+    pub version_group: NamedAPIResource,
 }
 
-#[derive(Deserialize)]
-pub(super) struct Name<'a> {
-    name: &'a str,
-    language: NamedAPIResource<'a>,
+#[derive(Debug, Clone, Deserialize)]
+pub struct Name {
+    pub name: String,
+    pub language: NamedAPIResource,
 }
 
-#[derive(Deserialize)]
-pub(super) struct NamedAPIResource<'a> {
-    description: &'a str,
-    url: &'a str,
+#[derive(Debug, Clone, Deserialize)]
+pub struct NamedAPIResource {
+    pub description: String,
+    pub url: String,
 }
 
-#[derive(Deserialize)]
-pub(super) struct VerboseEffect<'a> {
-    effect: &'a str,
-    short_effect: &'a str,
-    language: NamedAPIResource<'a>,
+#[derive(Debug, Clone, Deserialize)]
+pub struct VerboseEffect {
+    pub effect: String,
+    pub short_effect: String,
+    pub language: NamedAPIResource,
 }
 
-#[derive(Deserialize)]
-pub(super) struct VersionEncounterDetail<'a> {
-    #[serde(borrow)]
-    version: NamedAPIResource<'a>,
-    max_chance: i32,
-    encounter_details: Vec<Encounter<'a>>,
+#[derive(Debug, Clone, Deserialize)]
+pub struct VersionEncounterDetail {
+    pub version: NamedAPIResource,
+    pub max_chance: i32,
+    pub encounter_details: Vec<Encounter>,
 }
 
-#[derive(Deserialize)]
-pub(super) struct VersionGameIndex<'a> {
-    game_index: i32,
-    #[serde(borrow)]
-    version: NamedAPIResource<'a>,
+#[derive(Debug, Clone, Deserialize)]
+pub struct VersionGameIndex {
+    pub game_index: i32,
+    pub version: NamedAPIResource,
 }
 
-#[derive(Deserialize)]
-pub(super) struct VersionGroupFlavorText<'a> {
-    text: &'a str,
-    language: NamedAPIResource<'a>,
-    version_group: NamedAPIResource<'a>,
+#[derive(Debug, Clone, Deserialize)]
+pub struct VersionGroupFlavorText {
+    pub text: String,
+    pub language: NamedAPIResource,
+    pub version_group: NamedAPIResource,
 }

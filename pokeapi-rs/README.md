@@ -2,6 +2,6 @@
   <h1><code>pokeapi-rs</code></h1>
 
   <p>
-    <strong>Rust PokéAPI v2 bindings.</strong>
+    <strong>Rust bindings/wrapper for PokéAPI v2.</strong>
   </p>
 </div>

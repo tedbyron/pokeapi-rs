@@ -1865,7 +1865,17 @@ dependencies = [
 name = "pokeapi"
 version = "0.1.0"
 dependencies = [
+ "pokeapi-macro",
+ "serde",
  "ureq",
+]
+
+[[package]]
+name = "pokeapi-macro"
+version = "0.1.0"
+dependencies = [
+ "quote",
+ "syn",
 ]
 
 [[package]]
@@ -2613,6 +2623,8 @@ dependencies = [
  "log",
  "once_cell",
  "rustls",
+ "serde",
+ "serde_json",
  "url",
  "webpki",
  "webpki-roots",
