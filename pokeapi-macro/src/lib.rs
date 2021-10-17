@@ -11,9 +11,12 @@ use syn::{
     Visibility,
 };
 
+/// Struct for implementing a `Fold` hook.
+/// [Reference](https://docs.rs/syn/*/syn/fold/index.html)
 struct AllFieldsPub;
 
 impl Fold for AllFieldsPub {
+    /// Fold `FieldsNamed` and make all fields `pub` visibility.
     fn fold_fields_named(&mut self, fields: syn::FieldsNamed) -> syn::FieldsNamed {
         let brace_token = fields.brace_token;
         let named = fields
@@ -45,15 +48,20 @@ impl Fold for AllFieldsPub {
 #[allow(clippy::doc_markdown)]
 #[proc_macro_attribute]
 pub fn pokeapi_struct(_attr: TokenStream, item: TokenStream) -> TokenStream {
+    // Destructure and assign `item` to its corresponding tokens. The field `vis` is
+    // not necessary because the item's visibility will be made `pub`.
     let DeriveInput {
         attrs,
+        vis: _,
         ident,
         generics,
         data,
-        ..
     } = parse_macro_input!(item as DeriveInput);
 
+    // `attrs` must be iterable in order to tokenize.
     let attrs = attrs.iter();
+    // Ensure `item` is a `struct` with named fields, and change field visibility to
+    // `pub`.
     let fields = match data {
         Data::Struct(DataStruct {
             fields: Fields::Named(fields_named),
@@ -65,11 +73,12 @@ pub fn pokeapi_struct(_attr: TokenStream, item: TokenStream) -> TokenStream {
         _ => panic!("Expected a struct with named fields"),
     };
 
+    // Tokenize a syntax tree and return as a `TokenStream`.
     TokenStream::from(quote! {
         #(#attrs)*
         #[derive(Debug, Clone, PartialEq, Deserialize)]
         pub struct #ident #generics {
-            #(#fields,)*
+            #(#fields),*
         }
     })
 }
