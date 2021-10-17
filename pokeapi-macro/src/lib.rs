@@ -5,33 +5,71 @@
 
 use proc_macro::TokenStream;
 use quote::quote;
-use syn::{parse_macro_input, Data, DataStruct, DeriveInput, Fields};
+use syn::fold::Fold;
+use syn::{
+    parse_macro_input, token, Data, DataStruct, DeriveInput, Fields, FieldsNamed, VisPublic,
+    Visibility,
+};
+
+struct AllFieldsPub;
+
+impl Fold for AllFieldsPub {
+    fn fold_fields_named(&mut self, fields: syn::FieldsNamed) -> syn::FieldsNamed {
+        let brace_token = fields.brace_token;
+        let named = fields
+            .named
+            .into_iter()
+            .map(|mut field| {
+                field.vis = Visibility::Public(VisPublic {
+                    pub_token: token::Pub::default(),
+                });
+                field
+            })
+            .collect();
+
+        FieldsNamed { brace_token, named }
+    }
+}
 
 /// Attribute macro to generate a PokéAPI struct.
+///
+/// # Panics
+///
+/// Panics if the passed `item` is not a valid `struct`.
+///
+/// # Examples
+///
+/// ```
+/// todo!()
+/// ```
+#[allow(clippy::doc_markdown)]
 #[proc_macro_attribute]
-pub fn pub_struct(_attr: TokenStream, item: TokenStream) -> TokenStream {
-    let ast: DeriveInput = parse_macro_input!(item);
+pub fn pokeapi_struct(_attr: TokenStream, item: TokenStream) -> TokenStream {
+    let DeriveInput {
+        attrs,
+        ident,
+        generics,
+        data,
+        ..
+    } = parse_macro_input!(item as DeriveInput);
 
-    let name = &ast.ident;
-    let generics = &ast.generics;
-
-    let fields = match &ast.data {
+    let attrs = attrs.iter();
+    let fields = match data {
         Data::Struct(DataStruct {
-            fields: Fields::Named(fields),
+            fields: Fields::Named(fields_named),
             ..
-        }) => &fields.named,
-        _ => panic!("expected a struct with named fields"),
+        }) => AllFieldsPub
+            .fold_fields_named(fields_named)
+            .named
+            .into_iter(),
+        _ => panic!("Expected a struct with named fields"),
     };
 
-    let field_name = fields.iter().map(|field| &field.ident);
-    let field_type = fields.iter().map(|field| &field.ty);
-
     TokenStream::from(quote! {
-        #[derive(Debug, Clone, Deserialize)]
-        pub struct #name #generics {
-            #(
-                pub #field_name: #field_type,
-            )*
+        #(#attrs)*
+        #[derive(Debug, Clone, PartialEq, Deserialize)]
+        pub struct #ident #generics {
+            #(#fields,)*
         }
     })
 }

@@ -8,14 +8,14 @@
 
 ## Usage
 
-All API bindings in `pokeapi-rs` must be `Debug`, `Clone`, and `Deserialize`, as well as have `pub` visibility.
+All API bindings in `pokeapi-rs` must be `Debug`, `Clone`, `PartialEq`, and `Deserialize`, as well as have `pub` visibility.
 
-Consider the following attribute example:
+Consider the following example:
 
 ``` rust
-use pokeapi-macro::pub_struct;
+use pokeapi-macro::pokeapi_struct;
 
-#[pub_struct]
+#[pokeapi_struct]
 struct NamedAPIResource {
   description: String,
   url: String,
@@ -25,7 +25,7 @@ struct NamedAPIResource {
 This attribute will output the `struct` with required derived traits and visibility:
 
 ``` rust
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Deserialize)]
 pub struct NamedAPIResource {
   pub description: String,
   pub url: String,
