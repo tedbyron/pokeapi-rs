@@ -8,7 +8,7 @@ repository = "https://github.com/tedbyron/dex/tree/main/pokeapi-macro"
 documentation = "https://docs.rs/pokeapi-macro"
 readme = "README.md"
 license = "MIT OR Apache-2.0"
-keywords = ["pokemon", "pokeapi", "api"]
+keywords = ["pokeapi", "pokeapi-model", "pokeapi-rs"]
 
 [lib]
 proc-macro = true

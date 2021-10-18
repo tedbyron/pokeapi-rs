@@ -8,7 +8,7 @@ repository = "https://github.com/tedbyron/dex/tree/main/pokeapi-rs"
 documentation = "https://docs.rs/pokeapi"
 readme = "README.md"
 license = "MIT OR Apache-2.0"
-keywords = ["pokemon", "pokeapi", "api"]
+keywords = ["pokemon", "pokeapi", "pokeapi-rs", "api"]
 categories = ["api-bindings"]
 
 [dependencies]

@@ -8,7 +8,7 @@ repository = "https://github.com/tedbyron/dex/tree/main/pokeapi-model"
 documentation = "https://docs.rs/pokeapi-model"
 readme = "README.md"
 license = "MIT OR Apache-2.0"
-keywords = ["pokemon", "pokeapi", "api"]
+keywords = ["pokemon", "pokeapi", "pokeapi-rs", "api"]
 
 [dependencies]
 pokeapi-macro = { path = "../pokeapi-macro", version = "0.1.0" }
