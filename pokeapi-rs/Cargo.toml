@@ -12,7 +12,7 @@ keywords = ["pokemon", "pokeapi", "api"]
 categories = ["api-bindings"]
 
 [dependencies]
-pokeapi-model = { path = "../pokeapi-model" }
+pokeapi-model = { path = "../pokeapi-model", version = "0.1.0" }
 ureq = { version = "2.2.0", features = ["json"] }
 
 [profile.dev]
