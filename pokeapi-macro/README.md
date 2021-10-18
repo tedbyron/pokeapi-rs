@@ -12,7 +12,7 @@ All API bindings in `pokeapi-rs` must be `Debug`, `Clone`, `PartialEq`, and `Des
 
 Consider the following example:
 
-``` rust
+```rs
 use pokeapi-macro::pokeapi_struct;
 
 #[pokeapi_struct]
@@ -24,7 +24,7 @@ struct NamedAPIResource {
 
 This attribute will output the `struct` with required derived traits and visibility:
 
-``` rust
+```rs
 #[derive(Debug, Clone, PartialEq, Deserialize)]
 pub struct NamedAPIResource {
   pub description: String,

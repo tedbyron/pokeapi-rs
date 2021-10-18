@@ -16,7 +16,7 @@ use syn::{
 struct AllFieldsPub;
 
 impl Fold for AllFieldsPub {
-    /// Fold `FieldsNamed` and make all fields `pub` visibility.
+    /// Fold `FieldsNamed` and replace all `field.vis` with `Visibility::Public`.
     fn fold_fields_named(&mut self, fields: syn::FieldsNamed) -> syn::FieldsNamed {
         let brace_token = fields.brace_token;
         let named = fields
@@ -42,8 +42,23 @@ impl Fold for AllFieldsPub {
 ///
 /// # Examples
 ///
-/// ```
-/// todo!()
+/// ```ignore
+/// // Consider the following example:
+/// use pokeapi-macro::pokeapi_struct;
+///
+/// #[pokeapi_struct]
+/// struct NamedAPIResource {
+///   description: String,
+///   url: String,
+/// }
+///
+/// // This attribute will output the `struct` with required derived traits and
+/// // visibility:
+/// #[derive(Debug, Clone, PartialEq, Deserialize)]
+/// pub struct NamedAPIResource {
+///   pub description: String,
+///   pub url: String,
+/// }
 /// ```
 #[allow(clippy::doc_markdown)]
 #[proc_macro_attribute]
