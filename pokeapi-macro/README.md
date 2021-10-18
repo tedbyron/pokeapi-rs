@@ -2,7 +2,7 @@
   <h1><code>pokeapi-macro</code></h1>
 
   <p>
-    <strong>Attribute macro for <a href="../pokeapi-model"><code>pokeapi-model</code></a> structs.</strong>
+    <strong>Attribute macro for <code>pokeapi-model</code> structs.</strong>
   </p>
 </div>
 

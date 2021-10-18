@@ -1,7 +1,7 @@
 //! Common models.
 
 use pokeapi_macro::pokeapi_struct;
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 
 /// APIResource type.
 ///

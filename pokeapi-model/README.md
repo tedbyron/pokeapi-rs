@@ -2,6 +2,6 @@
   <h1><code>pokeapi-model</code></h1>
 
   <p>
-    <strong>Model for <a href="../pokeapi-rs"><code>pokeapi-rs</code></a></strong>
+    <strong>Model for <code>pokeapi-rs</code></strong>
   </p>
 </div>

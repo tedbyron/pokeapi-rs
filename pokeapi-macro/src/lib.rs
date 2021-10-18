@@ -90,8 +90,10 @@ pub fn pokeapi_struct(_attr: TokenStream, item: TokenStream) -> TokenStream {
 
     // Tokenize a syntax tree and return as a `TokenStream`.
     TokenStream::from(quote! {
+        #[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+        #[cfg_attr(debug_assertions, serde(deny_unknown_fields))]
+        #[non_exhaustive]
         #(#attrs)*
-        #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
         pub struct #ident #generics {
             #(#fields),*
         }

@@ -4,7 +4,7 @@ use crate::utility::common_models::{
     GenerationGameIndex, Name, NamedAPIResource, VersionEncounterDetail,
 };
 use pokeapi_macro::pokeapi_struct;
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize};
 
 #[pokeapi_struct]
 struct Location {

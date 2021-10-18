@@ -2,7 +2,7 @@
 
 use crate::utility::common_models::{Effect, FlavorText, NamedAPIResource};
 use pokeapi_macro::pokeapi_struct;
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize};
 
 /// ContestType type.
 ///

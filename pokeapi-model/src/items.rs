@@ -5,7 +5,7 @@ use crate::utility::common_models::{
     NamedAPIResource, VerboseEffect, VersionGroupFlavorText,
 };
 use pokeapi_macro::pokeapi_struct;
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize};
 
 #[pokeapi_struct]
 struct Item {

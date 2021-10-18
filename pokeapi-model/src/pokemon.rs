@@ -5,7 +5,7 @@ use crate::utility::common_models::{
     VerboseEffect, VersionEncounterDetail, VersionGameIndex,
 };
 use pokeapi_macro::pokeapi_struct;
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 
 #[pokeapi_struct]
 struct Ability {

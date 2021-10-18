@@ -2,7 +2,7 @@
 
 use crate::utility::common_models::{Name, NamedAPIResource};
 use pokeapi_macro::pokeapi_struct;
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize};
 
 /// EncounterMethod type.
 ///
