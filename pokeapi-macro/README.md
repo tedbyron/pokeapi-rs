@@ -11,7 +11,7 @@
 Consider the following example:
 
 ```rs
-use pokeapi-macro::pokeapi_struct;
+use pokeapi_macro::pokeapi_struct;
 
 #[pokeapi_struct]
 struct NamedAPIResource {
