@@ -1871,7 +1871,7 @@ dependencies = [
 
 [[package]]
 name = "pokeapi-macro"
-version = "1.0.0"
+version = "1.0.1"
 dependencies = [
  "quote",
  "syn",

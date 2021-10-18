@@ -2,7 +2,7 @@
 
 use crate::utility::common_models::Name;
 use pokeapi_macro::pokeapi_struct;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 /// Language type.
 ///

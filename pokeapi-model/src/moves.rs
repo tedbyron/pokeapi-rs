@@ -5,7 +5,7 @@ use crate::utility::common_models::{
     APIResource, Description, MachineVersionDetail, Name, NamedAPIResource, VerboseEffect,
 };
 use pokeapi_macro::pokeapi_struct;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 #[pokeapi_struct]
 struct Move {

@@ -8,8 +8,6 @@
 
 ## Usage
 
-All API bindings in `pokeapi-model` must be `Debug`, `Clone`, `PartialEq`, and `Deserialize`, as well as have `pub` visibility.
-
 Consider the following example:
 
 ```rs
@@ -25,7 +23,7 @@ struct NamedAPIResource {
 This attribute will output the `struct` with required derived traits and visibility:
 
 ```rs
-#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct NamedAPIResource {
   pub description: String,
   pub url: String,

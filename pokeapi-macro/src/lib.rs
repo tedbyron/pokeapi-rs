@@ -54,7 +54,7 @@ impl Fold for AllFieldsPub {
 ///
 /// // This attribute will output the `struct` with required derived traits and
 /// // visibility:
-/// #[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+/// #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 /// pub struct NamedAPIResource {
 ///   pub description: String,
 ///   pub url: String,
@@ -91,7 +91,7 @@ pub fn pokeapi_struct(_attr: TokenStream, item: TokenStream) -> TokenStream {
     // Tokenize a syntax tree and return as a `TokenStream`.
     TokenStream::from(quote! {
         #(#attrs)*
-        #[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+        #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
         pub struct #ident #generics {
             #(#fields),*
         }
