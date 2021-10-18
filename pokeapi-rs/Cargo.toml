@@ -8,12 +8,11 @@ repository = "https://github.com/tedbyron/dex/tree/main/pokeapi-rs"
 documentation = "https://docs.rs/pokeapi"
 readme = "README.md"
 license = "MIT OR Apache-2.0"
-keywords = ["pokemon", "pokeapi", "api-bindings", "ureq"]
+keywords = ["pokemon", "pokeapi", "api"]
 categories = ["api-bindings"]
 
 [dependencies]
-pokeapi-macro = { path = "../pokeapi-macro" }
-serde = { version = "1.0.130", features = ["derive"] }
+pokeapi-model = { path = "../pokeapi-model" }
 ureq = { version = "2.2.0", features = ["json"] }
 
 [profile.dev]

@@ -1865,8 +1865,7 @@ dependencies = [
 name = "pokeapi"
 version = "0.1.0"
 dependencies = [
- "pokeapi-macro",
- "serde",
+ "pokeapi-model",
  "ureq",
 ]
 
@@ -1876,6 +1875,14 @@ version = "0.1.0"
 dependencies = [
  "quote",
  "syn",
+]
+
+[[package]]
+name = "pokeapi-model"
+version = "0.1.0"
+dependencies = [
+ "pokeapi-macro",
+ "serde",
 ]
 
 [[package]]

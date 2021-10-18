@@ -1,7 +1,7 @@
 #![warn(clippy::all, clippy::pedantic, clippy::nursery)]
 #![forbid(unsafe_code)]
 
-//! Attribute macro for [`pokeapi-rs`](https://docs.rs/pokeapi) structs.
+//! Attribute macro for [`pokeapi-model`](https://docs.rs/pokeapi-model) structs.
 
 use proc_macro::TokenStream;
 use quote::quote;
@@ -44,7 +44,7 @@ impl Fold for AllFieldsPub {
 ///
 /// ```ignore
 /// // Consider the following example:
-/// use pokeapi-macro::pokeapi_struct;
+/// use pokeapi_macro::pokeapi_struct;
 ///
 /// #[pokeapi_struct]
 /// struct NamedAPIResource {
@@ -54,7 +54,7 @@ impl Fold for AllFieldsPub {
 ///
 /// // This attribute will output the `struct` with required derived traits and
 /// // visibility:
-/// #[derive(Debug, Clone, PartialEq, Deserialize)]
+/// #[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
 /// pub struct NamedAPIResource {
 ///   pub description: String,
 ///   pub url: String,
@@ -91,7 +91,7 @@ pub fn pokeapi_struct(_attr: TokenStream, item: TokenStream) -> TokenStream {
     // Tokenize a syntax tree and return as a `TokenStream`.
     TokenStream::from(quote! {
         #(#attrs)*
-        #[derive(Debug, Clone, PartialEq, Deserialize)]
+        #[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
         pub struct #ident #generics {
             #(#fields),*
         }
