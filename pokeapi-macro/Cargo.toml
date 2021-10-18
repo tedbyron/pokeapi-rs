@@ -2,6 +2,13 @@
 name = "pokeapi-macro"
 version = "0.1.0"
 edition = "2018"
+description = "Attribute macro for `pokeapi-model` structs."
+authors = ["Teddy Byron <ted@tedbyron.com>"]
+repository = "https://github.com/tedbyron/dex/tree/main/pokeapi-macro"
+documentation = "https://docs.rs/pokeapi-macro"
+readme = "README.md"
+license = "MIT OR Apache-2.0"
+keywords = ["pokemon", "pokeapi", "api"]
 
 [lib]
 proc-macro = true
