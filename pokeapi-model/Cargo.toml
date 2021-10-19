@@ -11,5 +11,5 @@ license = "MIT OR Apache-2.0"
 keywords = ["pokemon", "pokeapi", "pokeapi-rs", "api"]
 
 [dependencies]
-pokeapi-macro = { path = "../pokeapi-macro", version = "1.1.0" }
+pokeapi-macro = { path = "../pokeapi-macro", version = "1.1.1" }
 serde = { version = "1.0.130", features = ["derive"] }

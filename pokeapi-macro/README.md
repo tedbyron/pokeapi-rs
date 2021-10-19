@@ -10,7 +10,7 @@
 
 Consider the following example:
 
-```rs
+```rust
 use pokeapi_macro::pokeapi_struct;
 use std::marker::PhantomData;
 
@@ -25,7 +25,7 @@ struct NamedAPIResource<T> {
 
 This attribute will output the `struct` with required derived traits and visibility:
 
-```rs
+```rust
 #[derive(Debug, Clone, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub struct NamedAPIResource<T> {
     pub description: String,
