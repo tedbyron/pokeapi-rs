@@ -1,8 +1,9 @@
 //! Contest types.
 
-use crate::utility::common_models::{Effect, FlavorText, NamedAPIResource};
+use crate::berries::BerryFlavor;
+use crate::moves::Move;
+use crate::utility::{Effect, FlavorText, Language, NamedAPIResource};
 use pokeapi_macro::pokeapi_struct;
-use serde::{Deserialize};
 
 /// ContestType type.
 ///
@@ -14,7 +15,7 @@ use serde::{Deserialize};
 struct ContestType {
     id: i32,
     name: String,
-    berry_flavor: NamedAPIResource,
+    berry_flavor: NamedAPIResource<BerryFlavor>,
     names: Vec<ContestName>,
 }
 
@@ -25,7 +26,7 @@ struct ContestType {
 struct ContestName {
     name: String,
     color: String,
-    language: NamedAPIResource,
+    language: NamedAPIResource<Language>,
 }
 
 /// ContestEffect type.
@@ -52,5 +53,5 @@ struct SuperContestEffect {
     id: i32,
     appeal: i32,
     flavor_text_entries: Vec<FlavorText>,
-    moves: Vec<NamedAPIResource>,
+    moves: Vec<NamedAPIResource<Move>>,
 }

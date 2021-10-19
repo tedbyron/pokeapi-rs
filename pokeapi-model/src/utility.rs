@@ -1,14 +1,34 @@
-//! Common models.
+//! Utility types.
 
+use crate::encounters::{EncounterConditionValue, EncounterMethod};
+use crate::games::{Generation, Version, VersionGroup};
+use crate::machines::Machine;
 use pokeapi_macro::pokeapi_struct;
-use serde::Deserialize;
+use std::marker::PhantomData;
 
 /// APIResource type.
 ///
 /// [Reference](https://pokeapi.co/docs/v2#common-models)
 #[pokeapi_struct]
-struct APIResource {
+struct APIResource<T> {
     url: String,
+    #[serde(skip)]
+    _resource_type: PhantomData<*const T>,
+}
+
+/// Language type.
+///
+/// Languages for translations of API resource information.
+///
+/// [Reference](https://pokeapi.co/docs/v2#languages)
+#[pokeapi_struct]
+struct Language {
+    id: i32,
+    name: String,
+    official: bool,
+    iso639: String,
+    iso3166: String,
+    names: Vec<Name>,
 }
 
 /// Description type.
@@ -17,7 +37,7 @@ struct APIResource {
 #[pokeapi_struct]
 struct Description {
     description: String,
-    language: NamedAPIResource,
+    language: NamedAPIResource<Language>,
 }
 
 /// Effect type.
@@ -26,7 +46,7 @@ struct Description {
 #[pokeapi_struct]
 struct Effect {
     effect: String,
-    language: NamedAPIResource,
+    language: NamedAPIResource<Language>,
 }
 
 /// Encounter type.
@@ -36,9 +56,9 @@ struct Effect {
 struct Encounter {
     min_level: i32,
     max_level: i32,
-    condition_values: Vec<NamedAPIResource>,
+    condition_values: Vec<NamedAPIResource<EncounterConditionValue>>,
     chance: i32,
-    method: NamedAPIResource,
+    method: NamedAPIResource<EncounterMethod>,
 }
 
 /// FlavorText type.
@@ -47,8 +67,8 @@ struct Encounter {
 #[pokeapi_struct]
 struct FlavorText {
     flavor_text: String,
-    language: NamedAPIResource,
-    version: NamedAPIResource,
+    language: NamedAPIResource<Language>,
+    version: NamedAPIResource<Version>,
 }
 
 /// GenerationGameIndex type.
@@ -57,7 +77,7 @@ struct FlavorText {
 #[pokeapi_struct]
 struct GenerationGameIndex {
     game_index: i32,
-    generation: NamedAPIResource,
+    generation: NamedAPIResource<Generation>,
 }
 
 /// MachineVersionDetail type.
@@ -65,8 +85,8 @@ struct GenerationGameIndex {
 /// [Reference](https://pokeapi.co/docs/v2#common-models)
 #[pokeapi_struct]
 struct MachineVersionDetail {
-    machine: APIResource,
-    version_group: NamedAPIResource,
+    machine: APIResource<Machine>,
+    version_group: NamedAPIResource<VersionGroup>,
 }
 
 /// Name type.
@@ -75,16 +95,18 @@ struct MachineVersionDetail {
 #[pokeapi_struct]
 struct Name {
     name: String,
-    language: NamedAPIResource,
+    language: NamedAPIResource<Language>,
 }
 
 /// NamedAPIResource type.
 ///
 /// [Reference](https://pokeapi.co/docs/v2#common-models)
 #[pokeapi_struct]
-struct NamedAPIResource {
+struct NamedAPIResource<T> {
     description: String,
     url: String,
+    #[serde(skip)]
+    _resource_type: PhantomData<*const T>,
 }
 
 /// VerboseEffect type.
@@ -94,7 +116,7 @@ struct NamedAPIResource {
 struct VerboseEffect {
     effect: String,
     short_effect: String,
-    language: NamedAPIResource,
+    language: NamedAPIResource<Language>,
 }
 
 /// VersionEncounterDetail type.
@@ -102,7 +124,7 @@ struct VerboseEffect {
 /// [Reference](https://pokeapi.co/docs/v2#common-models)
 #[pokeapi_struct]
 struct VersionEncounterDetail {
-    version: NamedAPIResource,
+    version: NamedAPIResource<Version>,
     max_chance: i32,
     encounter_details: Vec<Encounter>,
 }
@@ -113,7 +135,7 @@ struct VersionEncounterDetail {
 #[pokeapi_struct]
 struct VersionGameIndex {
     game_index: i32,
-    version: NamedAPIResource,
+    version: NamedAPIResource<Version>,
 }
 
 /// VersionGroupFlavorText type.
@@ -122,6 +144,6 @@ struct VersionGameIndex {
 #[pokeapi_struct]
 struct VersionGroupFlavorText {
     text: String,
-    language: NamedAPIResource,
-    version_group: NamedAPIResource,
+    language: NamedAPIResource<Language>,
+    version_group: NamedAPIResource<VersionGroup>,
 }

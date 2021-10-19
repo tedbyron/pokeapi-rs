@@ -1862,7 +1862,7 @@ dependencies = [
 
 [[package]]
 name = "pokeapi-macro"
-version = "1.0.2"
+version = "1.1.0"
 dependencies = [
  "quote",
  "syn",
@@ -1870,7 +1870,7 @@ dependencies = [
 
 [[package]]
 name = "pokeapi-model"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "pokeapi-macro",
  "serde",

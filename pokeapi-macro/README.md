@@ -12,20 +12,25 @@ Consider the following example:
 
 ```rs
 use pokeapi_macro::pokeapi_struct;
+use std::marker::PhantomData;
 
 #[pokeapi_struct]
-struct NamedAPIResource {
-  description: String,
-  url: String,
+struct NamedAPIResource<T> {
+    description: String,
+    url: String,
+    #[serde(skip)]
+    _resource_type: PhantomData<*const T>,
 }
 ```
 
 This attribute will output the `struct` with required derived traits and visibility:
 
 ```rs
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-pub struct NamedAPIResource {
-  pub description: String,
-  pub url: String,
+#[derive(Debug, Clone, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
+pub struct NamedAPIResource<T> {
+    pub description: String,
+    pub url: String,
+    #[serde(skip)]
+    _resource_type: PhantomData<*const T>
 }
 ```

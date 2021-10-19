@@ -1,20 +1,22 @@
 //! Game types.
 
-use crate::utility::common_models::{Description, Name, NamedAPIResource};
+use crate::locations::Region;
+use crate::moves::{Move, MoveLearnMethod};
+use crate::pokemon::{Ability, PokemonSpecies, Type};
+use crate::utility::{Description, Name, NamedAPIResource};
 use pokeapi_macro::pokeapi_struct;
-use serde::{Deserialize};
 
 #[pokeapi_struct]
 struct Generation {
     id: i32,
     name: String,
-    abilities: Vec<NamedAPIResource>,
+    abilities: Vec<NamedAPIResource<Ability>>,
     names: Vec<Name>,
-    main_region: NamedAPIResource,
-    moves: Vec<NamedAPIResource>,
-    pokemon_species: Vec<NamedAPIResource>,
-    types: Vec<NamedAPIResource>,
-    version_groups: Vec<NamedAPIResource>,
+    main_region: NamedAPIResource<Region>,
+    moves: Vec<NamedAPIResource<Move>>,
+    pokemon_species: Vec<NamedAPIResource<PokemonSpecies>>,
+    types: Vec<NamedAPIResource<Type>>,
+    version_groups: Vec<NamedAPIResource<VersionGroup>>,
 }
 
 #[pokeapi_struct]
@@ -25,14 +27,14 @@ struct Pokedex {
     descriptions: Vec<Description>,
     names: Vec<Name>,
     pokemon_entries: Vec<PokemonEntry>,
-    region: NamedAPIResource,
-    version_groups: Vec<NamedAPIResource>,
+    region: NamedAPIResource<Region>,
+    version_groups: Vec<NamedAPIResource<VersionGroup>>,
 }
 
 #[pokeapi_struct]
 struct PokemonEntry {
     entry_number: i32,
-    pokemon_species: NamedAPIResource,
+    pokemon_species: NamedAPIResource<PokemonSpecies>,
 }
 
 #[pokeapi_struct]
@@ -40,7 +42,7 @@ struct Version {
     id: i32,
     name: String,
     names: Vec<Name>,
-    version_group: NamedAPIResource,
+    version_group: NamedAPIResource<VersionGroup>,
 }
 
 #[pokeapi_struct]
@@ -48,9 +50,9 @@ struct VersionGroup {
     id: i32,
     name: String,
     order: i32,
-    generation: NamedAPIResource,
-    move_learn_methods: Vec<NamedAPIResource>,
-    pokedexes: Vec<NamedAPIResource>,
-    regions: Vec<NamedAPIResource>,
-    versions: Vec<NamedAPIResource>,
+    generation: NamedAPIResource<Generation>,
+    move_learn_methods: Vec<NamedAPIResource<MoveLearnMethod>>,
+    pokedexes: Vec<NamedAPIResource<Pokedex>>,
+    regions: Vec<NamedAPIResource<Region>>,
+    versions: Vec<NamedAPIResource<Version>>,
 }

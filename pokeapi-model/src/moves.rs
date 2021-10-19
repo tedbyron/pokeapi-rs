@@ -1,11 +1,12 @@
 //! Move types.
 
-use crate::pokemon::AbilityEffectChange;
-use crate::utility::common_models::{
-    APIResource, Description, MachineVersionDetail, Name, NamedAPIResource, VerboseEffect,
+use crate::contests::{ContestEffect, ContestType, SuperContestEffect};
+use crate::games::{Generation, VersionGroup};
+use crate::pokemon::{AbilityEffectChange, Stat, Type};
+use crate::utility::{
+    APIResource, Description, Language, MachineVersionDetail, Name, NamedAPIResource, VerboseEffect,
 };
 use pokeapi_macro::pokeapi_struct;
-use serde::{Deserialize};
 
 #[pokeapi_struct]
 struct Move {
@@ -17,22 +18,22 @@ struct Move {
     priority: i32,
     power: i32,
     contest_combos: ContestComboSets,
-    contest_type: NamedAPIResource,
-    contest_effect: APIResource,
-    damage_class: NamedAPIResource,
+    contest_type: NamedAPIResource<ContestType>,
+    contest_effect: APIResource<ContestEffect>,
+    damage_class: NamedAPIResource<MoveDamageClass>,
     effect_entries: Vec<VerboseEffect>,
     effect_changes: Vec<AbilityEffectChange>,
     flavor_text_entries: Vec<MoveFlavorText>,
-    generation: NamedAPIResource,
+    generation: NamedAPIResource<Generation>,
     machines: Vec<MachineVersionDetail>,
     meta: MoveMetaData,
     names: Vec<Name>,
     past_values: Vec<PastMoveStatValues>,
     stat_changes: Vec<MoveStatChange>,
-    super_contest_effect: APIResource,
-    target: NamedAPIResource,
+    super_contest_effect: APIResource<SuperContestEffect>,
+    target: NamedAPIResource<MoveTarget>,
     #[serde(rename = "type")]
-    type_: NamedAPIResource,
+    type_: NamedAPIResource<Type>,
 }
 
 #[pokeapi_struct]
@@ -44,21 +45,21 @@ struct ContestComboSets {
 
 #[pokeapi_struct]
 struct ContestComboDetail {
-    use_before: Vec<NamedAPIResource>,
-    use_after: Vec<NamedAPIResource>,
+    use_before: Vec<NamedAPIResource<Move>>,
+    use_after: Vec<NamedAPIResource<Move>>,
 }
 
 #[pokeapi_struct]
 struct MoveFlavorText {
     flavor_text: String,
-    language: NamedAPIResource,
-    version_group: NamedAPIResource,
+    language: NamedAPIResource<Language>,
+    version_group: NamedAPIResource<VersionGroup>,
 }
 
 #[pokeapi_struct]
 struct MoveMetaData {
-    ailment: NamedAPIResource,
-    category: NamedAPIResource,
+    ailment: NamedAPIResource<MoveAilment>,
+    category: NamedAPIResource<MoveCategory>,
     min_hits: i32,
     max_hits: i32,
     min_turns: i32,
@@ -74,7 +75,7 @@ struct MoveMetaData {
 #[pokeapi_struct]
 struct MoveStatChange {
     change: i32,
-    stat: NamedAPIResource,
+    stat: NamedAPIResource<Stat>,
 }
 
 #[pokeapi_struct]
@@ -85,15 +86,15 @@ struct PastMoveStatValues {
     pp: i32,
     effect_entries: Vec<VerboseEffect>,
     #[serde(rename = "type")]
-    type_: NamedAPIResource,
-    version_group: NamedAPIResource,
+    type_: NamedAPIResource<Type>,
+    version_group: NamedAPIResource<VersionGroup>,
 }
 
 #[pokeapi_struct]
 struct MoveAilment {
     id: i32,
     name: String,
-    moves: Vec<NamedAPIResource>,
+    moves: Vec<NamedAPIResource<Move>>,
     names: Vec<Name>,
 }
 
@@ -108,7 +109,7 @@ struct MoveBattleStyle {
 struct MoveCategory {
     id: i32,
     name: String,
-    moves: Vec<NamedAPIResource>,
+    moves: Vec<NamedAPIResource<Move>>,
     descriptions: Vec<Description>,
 }
 
@@ -117,7 +118,7 @@ struct MoveDamageClass {
     id: i32,
     name: String,
     descriptions: Vec<Description>,
-    moves: Vec<NamedAPIResource>,
+    moves: Vec<NamedAPIResource<Move>>,
     names: Vec<Name>,
 }
 
@@ -127,7 +128,7 @@ struct MoveLearnMethod {
     name: String,
     descriptions: Vec<Description>,
     names: Vec<Name>,
-    version_groups: Vec<NamedAPIResource>,
+    version_groups: Vec<NamedAPIResource<VersionGroup>>,
 }
 
 #[pokeapi_struct]
@@ -135,9 +136,6 @@ struct MoveTarget {
     id: i32,
     name: String,
     descriptions: Vec<Description>,
-    moves: Vec<NamedAPIResource>,
+    moves: Vec<NamedAPIResource<Move>>,
     names: Vec<Name>,
 }
-
-#[pokeapi_struct]
-struct ItemSprites {}

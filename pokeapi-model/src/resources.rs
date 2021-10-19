@@ -1,8 +1,7 @@
 //! Resource list/pagination types.
 
-use crate::utility::common_models::NamedAPIResource;
+use crate::utility::NamedAPIResource;
 use pokeapi_macro::pokeapi_struct;
-use serde::Deserialize;
 
 /// NamedAPIResourceList type.
 ///
@@ -12,11 +11,11 @@ use serde::Deserialize;
 /// just add a 'limit' query parameter to the GET request, e.g. `?=60`. You can
 /// use 'offset' to move to the next page, e.g. `?limit=60&offset=60`.
 ///
-/// [Reference](https://pokeapi.co/docs/v2#named)
+/// [Reference](https://pokeapi.co/docs/v2#namedapiresourcelist)
 #[pokeapi_struct]
-struct NamedAPIResourceList {
+struct NamedAPIResourceList<T> {
     count: i32,
     next: String,
     previous: bool,
-    results: Vec<NamedAPIResource>,
+    results: Vec<NamedAPIResource<T>>,
 }

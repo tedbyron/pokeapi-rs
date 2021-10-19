@@ -1,18 +1,23 @@
 //! Pokémon types.
 
-use crate::utility::common_models::{
-    APIResource, Description, Effect, FlavorText, GenerationGameIndex, Name, NamedAPIResource,
-    VerboseEffect, VersionEncounterDetail, VersionGameIndex,
+use crate::berries::BerryFlavor;
+use crate::evolution::EvolutionChain;
+use crate::games::{Generation, Pokedex, Version, VersionGroup};
+use crate::items::Item;
+use crate::locations::{LocationArea, PalParkArea};
+use crate::moves::{Move, MoveBattleStyle, MoveDamageClass, MoveLearnMethod};
+use crate::utility::{
+    APIResource, Description, Effect, FlavorText, GenerationGameIndex, Language, Name,
+    NamedAPIResource, VerboseEffect, VersionEncounterDetail, VersionGameIndex,
 };
 use pokeapi_macro::pokeapi_struct;
-use serde::Deserialize;
 
 #[pokeapi_struct]
 struct Ability {
     id: i32,
     name: String,
     is_main_series: bool,
-    generation: NamedAPIResource,
+    generation: NamedAPIResource<Generation>,
     names: Vec<Name>,
     effect_entries: Vec<VerboseEffect>,
     effect_changes: Vec<AbilityEffectChange>,
@@ -23,21 +28,21 @@ struct Ability {
 #[pokeapi_struct]
 struct AbilityEffectChange {
     effect_entries: Vec<Effect>,
-    version_group: NamedAPIResource,
+    version_group: NamedAPIResource<VersionGroup>,
 }
 
 #[pokeapi_struct]
 struct AbilityFlavorText {
     flavor_text: String,
-    language: NamedAPIResource,
-    version_group: NamedAPIResource,
+    language: NamedAPIResource<Language>,
+    version_group: NamedAPIResource<VersionGroup>,
 }
 
 #[pokeapi_struct]
 struct AbilityPokemon {
     is_hidden: bool,
     slot: i32,
-    pokemon: NamedAPIResource,
+    pokemon: NamedAPIResource<Pokemon>,
 }
 
 #[pokeapi_struct]
@@ -52,7 +57,7 @@ struct EggGroup {
     id: i32,
     name: String,
     names: Vec<Name>,
-    pokemon_species: Vec<NamedAPIResource>,
+    pokemon_species: Vec<NamedAPIResource<PokemonSpecies>>,
 }
 
 #[pokeapi_struct]
@@ -60,13 +65,13 @@ struct Gender {
     id: i32,
     name: String,
     pokemon_species_details: Vec<PokemonSpeciesGender>,
-    required_for_evolution: Vec<NamedAPIResource>,
+    required_for_evolution: Vec<NamedAPIResource<PokemonSpecies>>,
 }
 
 #[pokeapi_struct]
 struct PokemonSpeciesGender {
     rate: i32,
-    pokemon_species: NamedAPIResource,
+    pokemon_species: NamedAPIResource<PokemonSpecies>,
 }
 
 #[pokeapi_struct]
@@ -76,7 +81,7 @@ struct GrowthRate {
     formula: String,
     descriptions: Vec<Description>,
     levels: Vec<GrowthRateExperienceLevel>,
-    pokemon_species: Vec<NamedAPIResource>,
+    pokemon_species: Vec<NamedAPIResource<PokemonSpecies>>,
 }
 
 #[pokeapi_struct]
@@ -89,10 +94,10 @@ struct GrowthRateExperienceLevel {
 struct Nature {
     id: i32,
     name: String,
-    decreased_stat: NamedAPIResource,
-    increased_stat: NamedAPIResource,
-    hates_flavor: NamedAPIResource,
-    likes_flavor: NamedAPIResource,
+    decreased_stat: NamedAPIResource<Stat>,
+    increased_stat: NamedAPIResource<Stat>,
+    hates_flavor: NamedAPIResource<BerryFlavor>,
+    likes_flavor: NamedAPIResource<BerryFlavor>,
     pokeathlon_stat_changes: Vec<NatureStatChange>,
     move_battle_style_preferences: Vec<MoveBattleStylePreference>,
     names: Vec<Name>,
@@ -101,14 +106,14 @@ struct Nature {
 #[pokeapi_struct]
 struct NatureStatChange {
     max_change: i32,
-    pokeathlon_stat: NamedAPIResource,
+    pokeathlon_stat: NamedAPIResource<PokeathlonStat>,
 }
 
 #[pokeapi_struct]
 struct MoveBattleStylePreference {
     low_hp_preference: i32,
     high_hp_preference: i32,
-    move_battle_style: NamedAPIResource,
+    move_battle_style: NamedAPIResource<MoveBattleStyle>,
 }
 
 #[pokeapi_struct]
@@ -128,7 +133,7 @@ struct NaturePokeathlonStatAffectSets {
 #[pokeapi_struct]
 struct NaturePokeathlonStatAffect {
     max_change: i32,
-    nature: NamedAPIResource,
+    nature: NamedAPIResource<Nature>,
 }
 
 #[pokeapi_struct]
@@ -141,13 +146,13 @@ struct Pokemon {
     order: i32,
     weight: i32,
     abilities: Vec<PokemonAbility>,
-    forms: Vec<NamedAPIResource>,
+    forms: Vec<NamedAPIResource<PokemonForm>>,
     game_indices: Vec<VersionGameIndex>,
     held_items: Vec<PokemonHeldItem>,
     location_area_encounters: String,
     moves: Vec<PokemonMove>,
     sprites: PokemonSprites,
-    species: NamedAPIResource,
+    species: NamedAPIResource<PokemonSpecies>,
     stats: Vec<PokemonStat>,
     types: Vec<PokemonType>,
 }
@@ -156,45 +161,45 @@ struct Pokemon {
 struct PokemonAbility {
     is_hidden: bool,
     slot: i32,
-    ability: NamedAPIResource,
+    ability: NamedAPIResource<Ability>,
 }
 
 #[pokeapi_struct]
 struct PokemonType {
     slot: i32,
     #[serde(rename = "type")]
-    type_: NamedAPIResource,
+    type_: NamedAPIResource<Type>,
 }
 
 #[pokeapi_struct]
 struct PokemonHeldItem {
-    item: NamedAPIResource,
+    item: NamedAPIResource<Item>,
     version_details: Vec<PokemonHeldItemVersion>,
 }
 
 #[pokeapi_struct]
 struct PokemonHeldItemVersion {
-    version: NamedAPIResource,
+    version: NamedAPIResource<Version>,
     rarity: i32,
 }
 
 #[pokeapi_struct]
 struct PokemonMove {
     #[serde(rename = "move")]
-    move_: NamedAPIResource,
+    move_: NamedAPIResource<Move>,
     version_group_details: Vec<PokemonMoveVersion>,
 }
 
 #[pokeapi_struct]
 struct PokemonMoveVersion {
-    move_learn_method: NamedAPIResource,
-    version_group: NamedAPIResource,
+    move_learn_method: NamedAPIResource<MoveLearnMethod>,
+    version_group: NamedAPIResource<VersionGroup>,
     level_learned_at: i32,
 }
 
 #[pokeapi_struct]
 struct PokemonStat {
-    stat: NamedAPIResource,
+    stat: NamedAPIResource<Stat>,
     effort: i32,
     base_stat: i32,
 }
@@ -213,7 +218,7 @@ struct PokemonSprites {
 
 #[pokeapi_struct]
 struct LocationAreaEncounter {
-    location_area: NamedAPIResource,
+    location_area: NamedAPIResource<LocationArea>,
     version_details: Vec<VersionEncounterDetail>,
 }
 
@@ -222,7 +227,7 @@ struct PokemonColor {
     id: i32,
     name: String,
     names: Vec<Name>,
-    pokemon_species: Vec<NamedAPIResource>,
+    pokemon_species: Vec<NamedAPIResource<PokemonSpecies>>,
 }
 
 #[pokeapi_struct]
@@ -235,9 +240,9 @@ struct PokemonForm {
     is_battle_only: bool,
     is_mega: bool,
     form_name: String,
-    pokemon: NamedAPIResource,
+    pokemon: NamedAPIResource<Pokemon>,
     sprites: PokemonFormSprites,
-    version_group: NamedAPIResource,
+    version_group: NamedAPIResource<VersionGroup>,
     names: Vec<Name>,
     form_names: Vec<Name>,
 }
@@ -255,7 +260,7 @@ struct PokemonHabitat {
     id: i32,
     name: String,
     names: Vec<Name>,
-    pokemon_species: Vec<NamedAPIResource>,
+    pokemon_species: Vec<NamedAPIResource<PokemonSpecies>>,
 }
 
 #[pokeapi_struct]
@@ -264,13 +269,13 @@ struct PokemonShape {
     name: String,
     awesome_names: Vec<AwesomeName>,
     names: Vec<Name>,
-    pokemon_species: Vec<NamedAPIResource>,
+    pokemon_species: Vec<NamedAPIResource<PokemonSpecies>>,
 }
 
 #[pokeapi_struct]
 struct AwesomeName {
     awesome_name: String,
-    language: NamedAPIResource,
+    language: NamedAPIResource<Language>,
 }
 
 #[pokeapi_struct]
@@ -287,15 +292,15 @@ struct PokemonSpecies {
     hatch_counter: i32,
     has_gender_differences: bool,
     forms_switchable: bool,
-    growth_rate: NamedAPIResource,
+    growth_rate: NamedAPIResource<GrowthRate>,
     pokedex_numbers: Vec<PokemonSpeciesDexEntry>,
-    egg_groups: NamedAPIResource,
-    color: NamedAPIResource,
-    shape: NamedAPIResource,
-    evolves_from_species: NamedAPIResource,
-    evolution_chain: APIResource,
-    habitat: NamedAPIResource,
-    generation: NamedAPIResource,
+    egg_groups: NamedAPIResource<EggGroup>,
+    color: NamedAPIResource<PokemonColor>,
+    shape: NamedAPIResource<PokemonShape>,
+    evolves_from_species: NamedAPIResource<EvolutionChain>,
+    evolution_chain: APIResource<EvolutionChain>,
+    habitat: NamedAPIResource<PokemonHabitat>,
+    generation: NamedAPIResource<Generation>,
     names: Vec<Name>,
     pal_park_encounters: Vec<PalParkEncounterArea>,
     flavor_text_entries: Vec<FlavorText>,
@@ -307,26 +312,26 @@ struct PokemonSpecies {
 #[pokeapi_struct]
 struct Genus {
     genus: String,
-    language: NamedAPIResource,
+    language: NamedAPIResource<Language>,
 }
 
 #[pokeapi_struct]
 struct PokemonSpeciesDexEntry {
     entry_number: i32,
-    pokedex: NamedAPIResource,
+    pokedex: NamedAPIResource<Pokedex>,
 }
 
 #[pokeapi_struct]
 struct PalParkEncounterArea {
     base_score: i32,
     rate: i32,
-    area: NamedAPIResource,
+    area: NamedAPIResource<PalParkArea>,
 }
 
 #[pokeapi_struct]
 struct PokemonSpeciesVariety {
     is_default: bool,
-    pokemon: NamedAPIResource,
+    pokemon: NamedAPIResource<Pokemon>,
 }
 
 #[pokeapi_struct]
@@ -337,8 +342,8 @@ struct Stat {
     is_battle_only: bool,
     affecting_moves: MoveStatAffectSets,
     affecting_natures: NatureStatAffectSets,
-    characteristics: Vec<APIResource>,
-    move_damage_class: NamedAPIResource,
+    characteristics: Vec<APIResource<Characteristic>>,
+    move_damage_class: NamedAPIResource<MoveDamageClass>,
     names: Vec<Name>,
 }
 
@@ -352,13 +357,13 @@ struct MoveStatAffectSets {
 struct MoveStatAffect {
     change: i32,
     #[serde(rename = "move")]
-    move_: NamedAPIResource,
+    move_: NamedAPIResource<Move>,
 }
 
 #[pokeapi_struct]
 struct NatureStatAffectSets {
-    increase: Vec<NamedAPIResource>,
-    decrease: Vec<NamedAPIResource>,
+    increase: Vec<NamedAPIResource<Nature>>,
+    decrease: Vec<NamedAPIResource<Nature>>,
 }
 
 #[pokeapi_struct]
@@ -367,25 +372,25 @@ struct Type {
     name: String,
     damage_relations: TypeRelations,
     game_indices: Vec<GenerationGameIndex>,
-    generation: NamedAPIResource,
-    move_damage_class: NamedAPIResource,
+    generation: NamedAPIResource<Generation>,
+    move_damage_class: NamedAPIResource<MoveDamageClass>,
     names: Vec<Name>,
     pokemon: Vec<TypePokemon>,
-    moves: Vec<NamedAPIResource>,
+    moves: Vec<NamedAPIResource<Move>>,
 }
 
 #[pokeapi_struct]
 struct TypePokemon {
     slot: i32,
-    pokemon: NamedAPIResource,
+    pokemon: NamedAPIResource<Pokemon>,
 }
 
 #[pokeapi_struct]
 struct TypeRelations {
-    no_damage_to: Vec<NamedAPIResource>,
-    half_damage_to: Vec<NamedAPIResource>,
-    double_damage_to: Vec<NamedAPIResource>,
-    no_damage_from: Vec<NamedAPIResource>,
-    half_damage_from: Vec<NamedAPIResource>,
-    double_damage_from: Vec<NamedAPIResource>,
+    no_damage_to: Vec<NamedAPIResource<Type>>,
+    half_damage_to: Vec<NamedAPIResource<Type>>,
+    double_damage_to: Vec<NamedAPIResource<Type>>,
+    no_damage_from: Vec<NamedAPIResource<Type>>,
+    half_damage_from: Vec<NamedAPIResource<Type>>,
+    double_damage_from: Vec<NamedAPIResource<Type>>,
 }

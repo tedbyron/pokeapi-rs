@@ -1,8 +1,7 @@
 //! Encounter types.
 
-use crate::utility::common_models::{Name, NamedAPIResource};
+use crate::utility::{Name, NamedAPIResource};
 use pokeapi_macro::pokeapi_struct;
-use serde::{Deserialize};
 
 /// EncounterMethod type.
 ///
@@ -23,13 +22,13 @@ struct EncounterCondition {
     id: i32,
     name: String,
     names: Vec<Name>,
-    values: Vec<NamedAPIResource>,
+    values: Vec<NamedAPIResource<EncounterConditionValue>>,
 }
 
 #[pokeapi_struct]
-struct EncounterConditionValues {
+struct EncounterConditionValue {
     id: i32,
     name: String,
-    condition: NamedAPIResource,
+    condition: NamedAPIResource<EncounterCondition>,
     names: Vec<Name>,
 }

@@ -1,8 +1,10 @@
 //! Berry types.
 
-use crate::utility::common_models::{Name, NamedAPIResource};
+use crate::contests::ContestType;
+use crate::items::Item;
+use crate::pokemon::Type;
+use crate::utility::{Name, NamedAPIResource};
 use pokeapi_macro::pokeapi_struct;
-use serde::{Deserialize};
 
 /// Berry type.
 ///
@@ -21,10 +23,10 @@ struct Berry {
     size: i32,
     smoothness: i32,
     soil_dryness: i32,
-    firmness: NamedAPIResource,
+    firmness: NamedAPIResource<BerryFirmness>,
     flavors: Vec<BerryFlavorMap>,
-    item: NamedAPIResource,
-    natural_gift_type: NamedAPIResource,
+    item: NamedAPIResource<Item>,
+    natural_gift_type: NamedAPIResource<Type>,
 }
 
 /// Berry flavor map type.
@@ -33,7 +35,7 @@ struct Berry {
 #[pokeapi_struct]
 struct BerryFlavorMap {
     potency: i32,
-    flavor: NamedAPIResource,
+    flavor: NamedAPIResource<BerryFlavor>,
 }
 
 /// Berry firmness type.
@@ -45,7 +47,7 @@ struct BerryFlavorMap {
 struct BerryFirmness {
     id: i32,
     name: String,
-    berries: Vec<NamedAPIResource>,
+    berries: Vec<NamedAPIResource<Berry>>,
     names: Vec<Name>,
 }
 
@@ -60,7 +62,7 @@ struct BerryFlavor {
     id: i32,
     name: String,
     berries: Vec<FlavorBerryMap>,
-    contest_type: NamedAPIResource,
+    contest_type: NamedAPIResource<ContestType>,
     names: Vec<Name>,
 }
 
@@ -70,5 +72,5 @@ struct BerryFlavor {
 #[pokeapi_struct]
 struct FlavorBerryMap {
     potency: i32,
-    berry: NamedAPIResource,
+    berry: NamedAPIResource<Berry>,
 }

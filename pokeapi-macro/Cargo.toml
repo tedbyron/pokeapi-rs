@@ -1,6 +1,6 @@
 [package]
 name = "pokeapi-macro"
-version = "1.0.2"
+version = "1.1.0"
 edition = "2018"
 description = "Attribute macro for `pokeapi-model` structs."
 authors = ["Teddy Byron <ted@tedbyron.com>"]
@@ -15,4 +15,4 @@ proc-macro = true
 
 [dependencies]
 quote = "1.0.10"
-syn = { version = "1.0.80", features = ["fold"] }
+syn = { version = "1.0.80", features = ["fold", "extra-traits"] }
