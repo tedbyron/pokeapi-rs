@@ -55,14 +55,13 @@ impl Fold for AllFieldsPub {
 /// ```ignore
 /// // Consider the following example:
 /// use pokeapi_macro::pokeapi_struct;
-/// use std::marker::PhantomData;
 ///
 /// #[pokeapi_struct]
 /// struct NamedAPIResource<T> {
 ///     description: String,
 ///     url: String,
 ///     #[serde(skip)]
-///     _resource_type: PhantomData<*const T>,
+///     _resource_type: std::marker::PhantomData<*const T>,
 /// }
 ///
 /// // This attribute will output the `struct` with required derived traits and
@@ -72,7 +71,7 @@ impl Fold for AllFieldsPub {
 ///     pub description: String,
 ///     pub url: String,
 ///     #[serde(skip)]
-///     _resource_type: PhantomData<*const T>
+///     _resource_type: std::marker::PhantomData<*const T>
 /// }
 /// ```
 #[allow(clippy::doc_markdown)]

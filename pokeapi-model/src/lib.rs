@@ -1,15 +1,20 @@
 #![warn(clippy::all, clippy::pedantic, clippy::nursery)]
 #![forbid(unsafe_code)]
 
-pub mod berries;
-pub mod contests;
-pub mod encounters;
-pub mod evolution;
-pub mod games;
-pub mod items;
-pub mod locations;
-pub mod machines;
-pub mod moves;
-pub mod pokemon;
-pub mod resources;
-pub mod utility;
+mod berries;
+mod contests;
+mod encounters;
+mod evolution;
+mod games;
+mod items;
+mod locations;
+mod machines;
+mod moves;
+mod pokemon;
+mod resources;
+mod utility;
+
+pub use {
+    berries::*, contests::*, encounters::*, evolution::*, games::*, items::*, locations::*,
+    machines::*, moves::*, pokemon::*, resources::*, utility::*,
+};

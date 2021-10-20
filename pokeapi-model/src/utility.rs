@@ -6,9 +6,6 @@ use crate::machines::Machine;
 use pokeapi_macro::pokeapi_struct;
 use std::marker::PhantomData;
 
-/// APIResource type.
-///
-/// [Reference](https://pokeapi.co/docs/v2#common-models)
 #[pokeapi_struct]
 struct APIResource<T> {
     url: String,
@@ -16,11 +13,6 @@ struct APIResource<T> {
     _resource_type: PhantomData<*const T>,
 }
 
-/// Language type.
-///
-/// Languages for translations of API resource information.
-///
-/// [Reference](https://pokeapi.co/docs/v2#languages)
 #[pokeapi_struct]
 struct Language {
     id: i32,
@@ -31,27 +23,18 @@ struct Language {
     names: Vec<Name>,
 }
 
-/// Description type.
-///
-/// [Reference](https://pokeapi.co/docs/v2#common-models)
 #[pokeapi_struct]
 struct Description {
     description: String,
     language: NamedAPIResource<Language>,
 }
 
-/// Effect type.
-///
-/// [Reference](https://pokeapi.co/docs/v2#common-models)
 #[pokeapi_struct]
 struct Effect {
     effect: String,
     language: NamedAPIResource<Language>,
 }
 
-/// Encounter type.
-///
-/// [Reference](https://pokeapi.co/docs/v2#common-models)
 #[pokeapi_struct]
 struct Encounter {
     min_level: i32,
@@ -61,9 +44,6 @@ struct Encounter {
     method: NamedAPIResource<EncounterMethod>,
 }
 
-/// FlavorText type.
-///
-/// [Reference](https://pokeapi.co/docs/v2#common-models)
 #[pokeapi_struct]
 struct FlavorText {
     flavor_text: String,
@@ -71,36 +51,24 @@ struct FlavorText {
     version: NamedAPIResource<Version>,
 }
 
-/// GenerationGameIndex type.
-///
-/// [Reference](https://pokeapi.co/docs/v2#common-models)
 #[pokeapi_struct]
 struct GenerationGameIndex {
     game_index: i32,
     generation: NamedAPIResource<Generation>,
 }
 
-/// MachineVersionDetail type.
-///
-/// [Reference](https://pokeapi.co/docs/v2#common-models)
 #[pokeapi_struct]
 struct MachineVersionDetail {
     machine: APIResource<Machine>,
     version_group: NamedAPIResource<VersionGroup>,
 }
 
-/// Name type.
-///
-/// [Reference](https://pokeapi.co/docs/v2#common-models)
 #[pokeapi_struct]
 struct Name {
     name: String,
     language: NamedAPIResource<Language>,
 }
 
-/// NamedAPIResource type.
-///
-/// [Reference](https://pokeapi.co/docs/v2#common-models)
 #[pokeapi_struct]
 struct NamedAPIResource<T> {
     description: String,
@@ -109,9 +77,6 @@ struct NamedAPIResource<T> {
     _resource_type: PhantomData<*const T>,
 }
 
-/// VerboseEffect type.
-///
-/// [Reference](https://pokeapi.co/docs/v2#common-models)
 #[pokeapi_struct]
 struct VerboseEffect {
     effect: String,
@@ -119,9 +84,6 @@ struct VerboseEffect {
     language: NamedAPIResource<Language>,
 }
 
-/// VersionEncounterDetail type.
-///
-/// [Reference](https://pokeapi.co/docs/v2#common-models)
 #[pokeapi_struct]
 struct VersionEncounterDetail {
     version: NamedAPIResource<Version>,
@@ -129,18 +91,12 @@ struct VersionEncounterDetail {
     encounter_details: Vec<Encounter>,
 }
 
-/// VersionGameIndex type.
-///
-/// [Reference](https://pokeapi.co/docs/v2#common-models)
 #[pokeapi_struct]
 struct VersionGameIndex {
     game_index: i32,
     version: NamedAPIResource<Version>,
 }
 
-/// VersionGroupFlavorText type.
-///
-/// [Reference](https://pokeapi.co/docs/v2#common-models)
 #[pokeapi_struct]
 struct VersionGroupFlavorText {
     text: String,

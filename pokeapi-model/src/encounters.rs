@@ -3,12 +3,6 @@
 use crate::utility::{Name, NamedAPIResource};
 use pokeapi_macro::pokeapi_struct;
 
-/// EncounterMethod type.
-///
-/// Methods by which the player might can encounter Pokémon in the wild, e.g.,
-/// walking in tall grass.
-///
-/// [Reference](https://pokeapi.co/docs/v2#encounter-methods)
 #[pokeapi_struct]
 struct EncounterMethod {
     id: i32,

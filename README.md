@@ -2,6 +2,6 @@
   <h1><code>dex</code></h1>
 
   <p>
-    <strong>Cross-platform Pokédex.</strong>
+    <strong></strong>
   </p>
 </div>

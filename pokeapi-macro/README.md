@@ -12,14 +12,13 @@ Consider the following example:
 
 ```rust
 use pokeapi_macro::pokeapi_struct;
-use std::marker::PhantomData;
 
 #[pokeapi_struct]
 struct NamedAPIResource<T> {
     description: String,
     url: String,
     #[serde(skip)]
-    _resource_type: PhantomData<*const T>,
+    _resource_type: std::marker::PhantomData<*const T>,
 }
 ```
 
@@ -31,6 +30,6 @@ pub struct NamedAPIResource<T> {
     pub description: String,
     pub url: String,
     #[serde(skip)]
-    _resource_type: PhantomData<*const T>
+    _resource_type: std::marker::PhantomData<*const T>
 }
 ```
