@@ -11,10 +11,10 @@ mod locations;
 mod machines;
 mod moves;
 mod pokemon;
-mod resources;
+mod resource_lists_pagination;
 mod utility;
 
 pub use {
     berries::*, contests::*, encounters::*, evolution::*, games::*, items::*, locations::*,
-    machines::*, moves::*, pokemon::*, resources::*, utility::*,
+    machines::*, moves::*, pokemon::*, resource_lists_pagination::*, utility::*,
 };
