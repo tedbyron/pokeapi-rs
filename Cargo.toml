@@ -1,14 +1,13 @@
 [package]
 name = "dex"
 version = "0.1.0"
-edition = "2018"
+edition = "2021"
 description = "Cross-platform Pokédex."
 authors = ["Teddy Byron <ted@tedbyron.com>"]
 repository = "https://github.com/tedbyron/dex"
 documentation = "https://github.com/tedbyron/dex"
 readme = "README.md"
 license = "MIT OR Apache-2.0"
-resolver = "2"
 
 [dependencies]
 getrandom = { version = "0.2.3", features = ["js"] }
