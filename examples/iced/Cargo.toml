@@ -1,0 +1,20 @@
+[package]
+name = "pokeapi-examples-iced"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+pokeapi = { path = "../../" }
+
+[dependencies.iced]
+features = ["image", "debug", "tokio"]
+git = "https://github.com/iced-rs/iced"
+
+[profile.dev]
+debug = 0
+
+[profile.release]
+codegen-units = 1
+lto = true
+panic = "abort"

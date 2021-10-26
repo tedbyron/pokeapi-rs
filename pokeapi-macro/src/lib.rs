@@ -28,12 +28,7 @@ impl Fold for PokeAPIFields {
             .into_iter()
             .map(|mut field| {
                 // If field doesn't have the `serde_skip` attribute, change visibility.
-                if field
-                    .attrs
-                    .iter()
-                    .find(|&attr| attr == &serde_skip)
-                    .is_none()
-                {
+                if !field.attrs.iter().any(|attr| attr == &serde_skip) {
                     field.vis = Visibility::Public(VisPublic {
                         pub_token: token::Pub::default(),
                     });

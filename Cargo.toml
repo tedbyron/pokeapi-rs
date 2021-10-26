@@ -1,29 +1,46 @@
 [package]
-name = "dex"
+name = "pokeapi"
 version = "0.1.0"
 edition = "2021"
-description = "Cross-platform Pokédex."
+description = "Rust bindings/wrapper for PokéAPI v2."
 authors = ["Teddy Byron <ted@tedbyron.com>"]
-repository = "https://github.com/tedbyron/dex"
-documentation = "https://github.com/tedbyron/dex"
+repository = "https://github.com/tedbyron/dex/tree/main/pokeapi-rs"
+documentation = "https://docs.rs/pokeapi"
 readme = "README.md"
 license = "MIT OR Apache-2.0"
+keywords = ["pokemon", "pokeapi", "api"]
+categories = ["api-bindings"]
+
+# [package.metadata.docs.rs]
+# features = ["client-ureq"]
+# no-default-features = true
+
+[workspace]
+members = ["pokeapi-macro", "pokeapi-model"]
+exclude = ["dex"]
+
+[features]
+default = ["sync"]
+
+async = ["reqwest", "async-trait"]
+sync = ["ureq", "maybe-async/is_sync"]
 
 [dependencies]
-getrandom = { version = "0.2.3", features = ["js"] }
-rand = "0.8.4"
-reqwest = { version = "0.11.6", features = ["json"] }
-serde = { version = "1.0.130", features = ["derive"] }
-pokeapi = { path = "./pokeapi-rs/" }
+pokeapi-model = { path = "./pokeapi-model", version = "0.1.1" }
+async-trait = { version = "0.1.51", optional = true }
+maybe-async = "0.2.6"
 
-[dependencies.iced]
-features = ["image", "debug", "tokio"]
-git = "https://github.com/iced-rs/iced"
+[dependencies.reqwest]
+version = "0.11.6"
+default-features = false
+features = ["rustls-tls", "json"]
+optional = true
+
+[dependencies.ureq]
+version = "2.3.0"
+default-features = false
+features = ["json"]
+optional = true
 
 [profile.dev]
 debug = 0
-
-[profile.release]
-codegen-units = 1
-lto = true
-panic = "abort"
