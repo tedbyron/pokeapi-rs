@@ -1,5 +1,5 @@
 **/*.rs.bk
 target/
 Cargo.lock
-!/dex/Cargo.lock
+!/examples/**/Cargo.lock
 .DS_Store
