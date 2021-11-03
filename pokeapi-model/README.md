@@ -2,6 +2,6 @@
   <h1><code>pokeapi-model</code></h1>
 
   <p>
-    <strong>Model for <code>pokeapi-rs</code></strong>
+    <strong>Data structures for PokéAPI v2.</strong>
   </p>
 </div>

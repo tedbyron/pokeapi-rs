@@ -17,7 +17,6 @@ categories = ["api-bindings"]
 
 [workspace]
 members = ["pokeapi-macro", "pokeapi-model"]
-exclude = ["dex"]
 
 [features]
 default = ["sync"]

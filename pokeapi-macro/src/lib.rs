@@ -1,7 +1,6 @@
 #![warn(clippy::all, clippy::pedantic, clippy::nursery)]
 #![forbid(unsafe_code)]
-
-//! Attribute macro for [`pokeapi-model`](https://docs.rs/pokeapi-model) structs.
+#![doc = include_str!("../README.md")]
 
 use proc_macro::TokenStream;
 use quote::quote;
@@ -83,8 +82,9 @@ pub fn pokeapi_struct(_attr: TokenStream, item: TokenStream) -> TokenStream {
         ..
     } = parse_macro_input!(item as DeriveInput);
 
-    // `attrs` must be iterable in order to tokenize.
-    let attrs = attrs.iter();
+    let ident_lower = ident.to_string().to_ascii_lowercase();
+    let doc_comment = format!("[{}{}]({0}{1})", "https://pokeapi.co/docs/v2#", ident_lower);
+    let doc_attr: Attribute = parse_quote!(#[doc = #doc_comment]);
 
     // Ensure parameter `item` is a `struct` with named fields, and call the
     // `PokeAPIFields.fold_fields_name` hook on the struct's `Field`s.
@@ -101,6 +101,7 @@ pub fn pokeapi_struct(_attr: TokenStream, item: TokenStream) -> TokenStream {
 
     // Quasi-quote the syntax tree and return as a `TokenStream`.
     TokenStream::from(quote! {
+        #doc_attr
         #(#attrs)*
         #[derive(Debug, Clone, PartialEq, Eq, Hash, serde::Serialize, serde::Deserialize)]
         #[non_exhaustive]
