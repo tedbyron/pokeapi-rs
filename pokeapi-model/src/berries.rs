@@ -1,10 +1,8 @@
 //! Berry types.
 
-use crate::contests::ContestType;
-use crate::items::Item;
-use crate::pokemon::Type;
-use crate::utility::{Name, NamedAPIResource};
 use pokeapi_macro::pokeapi_struct;
+
+use crate::{ContestType, Item, Name, NamedAPIResource, Type};
 
 #[pokeapi_struct]
 struct Berry {

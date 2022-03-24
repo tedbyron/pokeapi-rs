@@ -1,16 +1,13 @@
 //! Pokémon types.
 
-use crate::berries::BerryFlavor;
-use crate::evolution::EvolutionChain;
-use crate::games::{Generation, Pokedex, Version, VersionGroup};
-use crate::items::Item;
-use crate::locations::{LocationArea, PalParkArea};
-use crate::moves::{Move, MoveBattleStyle, MoveDamageClass, MoveLearnMethod};
-use crate::utility::{
-    APIResource, Description, Effect, FlavorText, GenerationGameIndex, Language, Name,
-    NamedAPIResource, VerboseEffect, VersionEncounterDetail, VersionGameIndex,
-};
 use pokeapi_macro::pokeapi_struct;
+
+use crate::{
+    APIResource, BerryFlavor, Description, Effect, EvolutionChain, FlavorText, Generation,
+    GenerationGameIndex, Item, Language, LocationArea, Move, MoveBattleStyle, MoveDamageClass,
+    MoveLearnMethod, Name, NamedAPIResource, PalParkArea, Pokedex, VerboseEffect, Version,
+    VersionEncounterDetail, VersionGameIndex, VersionGroup,
+};
 
 #[pokeapi_struct]
 struct Ability {

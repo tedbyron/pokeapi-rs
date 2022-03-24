@@ -1,4 +1,10 @@
-#![warn(clippy::all, clippy::pedantic, clippy::nursery)]
+#![warn(
+    clippy::all,
+    clippy::cargo,
+    clippy::nursery,
+    clippy::pedantic,
+    rust_2018_idioms
+)]
 #![forbid(unsafe_code)]
 #![doc = include_str!("../README.md")]
 

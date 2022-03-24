@@ -1,10 +1,11 @@
 //! Game types.
 
-use crate::locations::Region;
-use crate::moves::{Move, MoveLearnMethod};
-use crate::pokemon::{Ability, PokemonSpecies, Type};
-use crate::utility::{Description, Name, NamedAPIResource};
 use pokeapi_macro::pokeapi_struct;
+
+use crate::{
+    Ability, Description, Move, MoveLearnMethod, Name, NamedAPIResource, PokemonSpecies, Region,
+    Type,
+};
 
 #[pokeapi_struct]
 struct Generation {

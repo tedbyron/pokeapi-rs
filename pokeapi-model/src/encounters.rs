@@ -1,7 +1,8 @@
 //! Encounter types.
 
-use crate::utility::{Name, NamedAPIResource};
 use pokeapi_macro::pokeapi_struct;
+
+use crate::{Name, NamedAPIResource};
 
 #[pokeapi_struct]
 struct EncounterMethod {

@@ -1,12 +1,12 @@
 //! Move types.
 
-use crate::contests::{ContestEffect, ContestType, SuperContestEffect};
-use crate::games::{Generation, VersionGroup};
-use crate::pokemon::{AbilityEffectChange, Stat, Type};
-use crate::utility::{
-    APIResource, Description, Language, MachineVersionDetail, Name, NamedAPIResource, VerboseEffect,
-};
 use pokeapi_macro::pokeapi_struct;
+
+use crate::{
+    APIResource, AbilityEffectChange, ContestEffect, ContestType, Description, Generation,
+    Language, MachineVersionDetail, Name, NamedAPIResource, Stat, SuperContestEffect, Type,
+    VerboseEffect, VersionGroup,
+};
 
 #[pokeapi_struct]
 struct Move {

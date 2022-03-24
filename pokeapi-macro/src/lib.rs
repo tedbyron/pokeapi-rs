@@ -1,4 +1,10 @@
-#![warn(clippy::all, clippy::pedantic, clippy::nursery)]
+#![warn(
+    clippy::all,
+    clippy::cargo,
+    clippy::nursery,
+    clippy::pedantic,
+    rust_2018_idioms
+)]
 #![forbid(unsafe_code)]
 #![doc = include_str!("../README.md")]
 
@@ -26,12 +32,20 @@ impl Fold for PokeAPIFields {
             .named
             .into_iter()
             .map(|mut field| {
-                // If field doesn't have the `serde_skip` attribute, change visibility.
+                if let Some(ref ident) = field.ident {
+                    if ident.to_string().starts_with('_') {
+                        if !field.attrs.iter().any(|attr| attr == &serde_skip) {
+                            field.attrs.push(serde_skip.clone());
+                        }
+                    }
+                }
+
                 if !field.attrs.iter().any(|attr| attr == &serde_skip) {
                     field.vis = Visibility::Public(VisPublic {
                         pub_token: token::Pub::default(),
                     });
                 }
+
                 field
             })
             .collect();
@@ -83,7 +97,10 @@ pub fn pokeapi_struct(_attr: TokenStream, item: TokenStream) -> TokenStream {
     } = parse_macro_input!(item as DeriveInput);
 
     let ident_lower = ident.to_string().to_ascii_lowercase();
-    let doc_comment = format!("[{}{}]({0}{1})", "https://pokeapi.co/docs/v2#", ident_lower);
+    let doc_comment = format!(
+        "[{url}{ident_lower}]({url}{ident_lower})",
+        url = "https://pokeapi.co/docs/v2#"
+    );
     let doc_attr: Attribute = parse_quote!(#[doc = #doc_comment]);
 
     // Ensure parameter `item` is a `struct` with named fields, and call the

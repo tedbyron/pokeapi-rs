@@ -2,7 +2,7 @@
   <h1><code>pokeapi-macro</code></h1>
 
   <p>
-    <strong>Attribute macros for <code>pokeapi-model</code>.</strong>
+    <strong>Attribute macro for <code>pokeapi-model</code>.</strong>
   </p>
 </div>
 
@@ -17,7 +17,6 @@ use pokeapi_macro::pokeapi_struct;
 struct NamedAPIResource<T> {
     description: String,
     url: String,
-    #[serde(skip)]
     _resource_type: std::marker::PhantomData<*const T>,
 }
 ```
@@ -25,7 +24,7 @@ struct NamedAPIResource<T> {
 This attribute will output the `struct` with required derived traits and visibility:
 
 ```rust
-#[derive(Debug, Clone, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, serde::Serialize, serde::Deserialize)]
 pub struct NamedAPIResource<T> {
     pub description: String,
     pub url: String,

@@ -1,10 +1,11 @@
 //! Location types.
 
-use crate::encounters::EncounterMethod;
-use crate::games::{Generation, Pokedex, Version, VersionGroup};
-use crate::pokemon::{Pokemon, PokemonSpecies};
-use crate::utility::{GenerationGameIndex, Name, NamedAPIResource, VersionEncounterDetail};
 use pokeapi_macro::pokeapi_struct;
+
+use crate::{
+    EncounterMethod, Generation, GenerationGameIndex, Name, NamedAPIResource, Pokedex, Pokemon,
+    PokemonSpecies, Version, VersionEncounterDetail, VersionGroup,
+};
 
 #[pokeapi_struct]
 struct Location {

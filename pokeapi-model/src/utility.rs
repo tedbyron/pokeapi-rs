@@ -1,15 +1,14 @@
 //! Utility types.
 
-use crate::encounters::{EncounterConditionValue, EncounterMethod};
-use crate::games::{Generation, Version, VersionGroup};
-use crate::machines::Machine;
-use pokeapi_macro::pokeapi_struct;
 use std::marker::PhantomData;
+
+use pokeapi_macro::pokeapi_struct;
+
+use crate::{EncounterConditionValue, EncounterMethod, Generation, Machine, Version, VersionGroup};
 
 #[pokeapi_struct]
 struct APIResource<T> {
     url: String,
-    #[serde(skip)]
     _resource_type: PhantomData<*const T>,
 }
 
@@ -73,7 +72,6 @@ struct Name {
 struct NamedAPIResource<T> {
     description: String,
     url: String,
-    #[serde(skip)]
     _resource_type: PhantomData<*const T>,
 }
 

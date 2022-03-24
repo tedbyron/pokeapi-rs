@@ -1,11 +1,8 @@
 //! Evolution types.
 
-use crate::items::Item;
-use crate::locations::Location;
-use crate::moves::Move;
-use crate::pokemon::{PokemonSpecies, Type};
-use crate::utility::{Name, NamedAPIResource};
 use pokeapi_macro::pokeapi_struct;
+
+use crate::{Item, Location, Move, Name, NamedAPIResource, PokemonSpecies, Type};
 
 #[pokeapi_struct]
 struct EvolutionChain {

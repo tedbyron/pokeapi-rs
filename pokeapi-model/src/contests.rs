@@ -1,9 +1,8 @@
 //! Contest types.
 
-use crate::berries::BerryFlavor;
-use crate::moves::Move;
-use crate::utility::{Effect, FlavorText, Language, NamedAPIResource};
 use pokeapi_macro::pokeapi_struct;
+
+use crate::{BerryFlavor, Effect, FlavorText, Language, Move, NamedAPIResource};
 
 #[pokeapi_struct]
 struct ContestType {

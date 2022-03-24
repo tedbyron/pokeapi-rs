@@ -1,13 +1,11 @@
 //! Item types.
 
-use crate::evolution::EvolutionChain;
-use crate::games::Version;
-use crate::pokemon::Pokemon;
-use crate::utility::{
-    APIResource, Description, Effect, GenerationGameIndex, MachineVersionDetail, Name,
-    NamedAPIResource, VerboseEffect, VersionGroupFlavorText,
-};
 use pokeapi_macro::pokeapi_struct;
+
+use crate::{
+    APIResource, Description, Effect, EvolutionChain, GenerationGameIndex, MachineVersionDetail,
+    Name, NamedAPIResource, Pokemon, VerboseEffect, Version, VersionGroupFlavorText,
+};
 
 #[pokeapi_struct]
 struct Item {

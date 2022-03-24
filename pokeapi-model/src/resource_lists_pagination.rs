@@ -1,7 +1,8 @@
 //! Resource list/pagination types.
 
-use crate::utility::NamedAPIResource;
 use pokeapi_macro::pokeapi_struct;
+
+use crate::NamedAPIResource;
 
 #[pokeapi_struct]
 struct NamedAPIResourceList<T> {

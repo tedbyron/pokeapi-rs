@@ -1,10 +1,8 @@
 //! Machine types.
 
-use crate::games::VersionGroup;
-use crate::items::Item;
-use crate::moves::Move;
-use crate::utility::NamedAPIResource;
 use pokeapi_macro::pokeapi_struct;
+
+use crate::{Item, Move, NamedAPIResource, VersionGroup};
 
 #[pokeapi_struct]
 struct Machine {
