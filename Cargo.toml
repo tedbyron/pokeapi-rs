@@ -1,6 +1,6 @@
 [package]
 name = "pokeapi"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "Rust bindings/wrapper and client for PokéAPI v2."
 authors = ["Teddy Byron <ted@tedbyron.com>"]
@@ -11,37 +11,41 @@ license = "MIT OR Apache-2.0"
 keywords = ["pokemon", "pokeapi", "api"]
 categories = ["api-bindings"]
 
-# [package.metadata.docs.rs]
-# features = ["client-ureq"]
-# no-default-features = true
-
 [workspace]
 members = ["pokeapi-macro", "pokeapi-model"]
 
 [features]
-default = []
+default = ["client-ureq"]
+__async = ["async-trait"]
+__sync = ["maybe-async/is_sync"]
 
-client-reqwest = ["reqwest"]
-client-ureq = ["ureq", "maybe-async/is_sync"]
+client-reqwest = ["reqwest", "__async"]
+client-ureq = ["ureq", "__sync", "native-tls"]
 
 [dependencies]
+async-trait = { version = "0.1.53", optional = true }
 maybe-async = "0.2.6"
-pokeapi-model = { path = "./pokeapi-model", version = "0.1.2" }
+native-tls = { version = "0.2.8", optional = true }
+pokeapi-model = { path = "./pokeapi-model", version = "0.1.4" }
 serde = { version = "1.0.136", default-features = false }
 serde_json = "1.0.79"
 thiserror = "1.0.30"
+url = "2.2.2"
 
 [dependencies.reqwest]
 version = "0.11.10"
 default-features = false
-features = ["rustls-tls", "json"]
+features = ["native-tls", "json"]
 optional = true
 
 [dependencies.ureq]
 version = "2.4.0"
 default-features = false
-features = ["json"]
+features = ["native-tls", "json"]
 optional = true
+
+[dev-dependencies]
+tokio = { version = "1.17.0", features = ["rt-multi-thread", "macros"] }
 
 [profile.dev]
 debug = 0
