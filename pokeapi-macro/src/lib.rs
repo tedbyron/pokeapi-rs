@@ -32,11 +32,12 @@ impl Fold for PokeAPIFields {
             .named
             .into_iter()
             .map(|mut field| {
-                if let Some(ref ident) = field.ident {
-                    if ident.to_string().starts_with('_') {
-                        if !field.attrs.iter().any(|attr| attr == &serde_skip) {
-                            field.attrs.push(serde_skip.clone());
-                        }
+                // Safe to unwrap because we know the field is named.
+                let ident = field.ident.as_ref().unwrap();
+
+                if ident.to_string().starts_with('_') {
+                    if !field.attrs.iter().any(|attr| attr == &serde_skip) {
+                        field.attrs.push(serde_skip.clone());
                     }
                 }
 
@@ -70,12 +71,11 @@ impl Fold for PokeAPIFields {
 /// struct NamedAPIResource<T> {
 ///     description: String,
 ///     url: String,
-///     #[serde(skip)]
 ///     _resource_type: std::marker::PhantomData<*const T>,
 /// }
 ///
 /// // This attribute will output the struct with required derived traits and visibility:
-/// #[derive(Debug, Clone, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
+/// #[derive(Debug, Clone, PartialEq, Eq, Hash, serde::Serialize, serde::Deserialize)]
 /// pub struct NamedAPIResource<T> {
 ///     pub description: String,
 ///     pub url: String,
