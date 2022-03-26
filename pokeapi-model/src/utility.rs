@@ -70,7 +70,7 @@ struct Name {
 
 #[pokeapi_struct]
 struct NamedAPIResource<T> {
-    description: String,
+    name: String,
     url: String,
     _resource_type: PhantomData<*const T>,
 }
