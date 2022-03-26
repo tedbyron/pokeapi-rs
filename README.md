@@ -34,3 +34,5 @@ TODO
 - add endpoints to model through macro
 - native tls - ureq needs `Agent` in `Client`
 - cache
+
+- CI for both sync/async and other platforms
