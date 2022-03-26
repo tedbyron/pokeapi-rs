@@ -9,6 +9,7 @@ documentation = "https://docs.rs/pokeapi-macro"
 readme = "README.md"
 license = "MIT OR Apache-2.0"
 keywords = ["pokeapi", "pokeapi-model"]
+categories = ["development-tools::build-utils"]
 
 [lib]
 proc-macro = true

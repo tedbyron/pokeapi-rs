@@ -35,10 +35,10 @@ impl Fold for PokeAPIFields {
                 // Safe to unwrap because we know the field is named.
                 let ident = field.ident.as_ref().unwrap();
 
-                if ident.to_string().starts_with('_') {
-                    if !field.attrs.iter().any(|attr| attr == &serde_skip) {
-                        field.attrs.push(serde_skip.clone());
-                    }
+                if ident.to_string().starts_with('_')
+                    && !field.attrs.iter().any(|attr| attr == &serde_skip)
+                {
+                    field.attrs.push(serde_skip.clone());
                 }
 
                 if !field.attrs.iter().any(|attr| attr == &serde_skip) {

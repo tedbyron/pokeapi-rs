@@ -21,7 +21,12 @@ pokeapi = "1"
 use pokeapi::{Client};
 use pokeapi::model::Pokemon;
 
-Client::get::<Pokemon>()
+let client = Client::new();
+
+// Get a resource by name:
+client.pokemon('pikachu')
+// Or by ID:
+client.pokemon('25')
 ```
 
 TODO
