@@ -6,27 +6,35 @@
   </p>
 </div>
 
-Rust bindings/wrapper and client for PokéAPI v2. WIP with future support for request/response/image
-caching and sync/async clients.
+WIP with future support for request/response/image caching and sync/async clients.
+
+With the `ureq` client:
 
 ```toml
-# Cargo.toml
 [dependencies]
 pokeapi = "1"
+```
+
+With the `reqwest` client:
+
+```toml
+[dependencies.pokeapi]
+version = "1"
+default-features = false
+features = ["client-reqwest"]
 ```
 
 # Usage
 
 ```rs
-use pokeapi::{Client};
-use pokeapi::model::Pokemon;
+use pokeapi::Client;
 
 let client = Client::new();
 
 // Get a resource by name:
-client.pokemon('pikachu')
+let pikachu = client.pokemon('pikachu')
 // Or by ID:
-client.pokemon('25')
+let pikachu = client.pokemon('25')
 ```
 
 TODO
